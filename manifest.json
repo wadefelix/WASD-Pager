@@ -1,0 +1,35 @@
+{
+  "manifest_version": 2,
+  "name": "WASD Page-Turner",
+  "version": "0.1",
+
+  "description": "Page Turner",
+  "default_locale": "en",
+  "homepage_url": "https://github.com/wadefelix/",
+
+  "developer": {
+    "name": "Ren Wei"
+  },
+  
+  "icons": {
+    "16": "icons/page-16.png",
+    "32": "icons/page-32.png",
+    "48": "icons/page-48.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-script.js"]
+    }
+  ],
+  
+  "permissions": [
+    "storage"
+  ],
+  
+  "options_ui": {
+      "page": "options.html"
+  }
+
+}

@@ -1,0 +1,46 @@
+{
+  "extensionName": {
+    "message": "WASD Page-Turner",
+    "description": "Name of the extension."
+  },
+
+  "extensionDescription": {
+    "message": "Page Turner",
+    "description": "Description of the add-on."
+  },
+  
+  "stringSave": {
+    "message": "Save",
+    "description": "string"
+  },
+  
+  "stringAdd": {
+    "message": "Add",
+    "description": "string"
+  },
+
+  "stringSite": {
+    "message": "Site",
+    "description": "string"
+  },
+  
+  "stringPre": {
+    "message": "Previous Page",
+    "description": "string"
+  },
+
+  "stringNext": {
+    "message": "Next Page",
+    "description": "string"
+  },
+  
+  "stringOp": {
+    "message": "Operation",
+    "description": "string"
+  },
+  
+  "stringDel": {
+    "message": "Del",
+    "description": "string"
+  }
+}

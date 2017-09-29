@@ -1,0 +1,46 @@
+{
+  "extensionName": {
+    "message": "WASD翻页",
+    "description": "Name of the extension."
+  },
+
+  "extensionDescription": {
+    "message": "使用WASD键快速翻到上一页下一页",
+    "description": "Description of the add-on."
+  },
+  
+  "stringSave": {
+    "message": "保存",
+    "description": "string"
+  },
+  
+  "stringAdd": {
+    "message": "增加",
+    "description": "string"
+  },
+
+  "stringSite": {
+    "message": "站点域名",
+    "description": "string"
+  },
+  
+  "stringPre": {
+    "message": "上一页",
+    "description": "string"
+  },
+
+  "stringNext": {
+    "message": "下一页",
+    "description": "string"
+  },
+  
+  "stringOp": {
+    "message": "操作",
+    "description": "string"
+  },
+  
+  "stringDel": {
+    "message": "删除",
+    "description": "string"
+  }
+}

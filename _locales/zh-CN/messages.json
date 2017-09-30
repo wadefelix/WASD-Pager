@@ -1,11 +1,11 @@
 {
   "extensionName": {
-    "message": "WASD翻页",
+    "message": "WASD翻页助手",
     "description": "Name of the extension."
   },
 
   "extensionDescription": {
-    "message": "使用WASD键快速翻到上一页下一页",
+    "message": "使用WASD键快速翻到上一页下一页。\n*A - 上一页\n*D - 下一页\nW - PageUp\nS - PageDown\nQ - 页顶\nE - 页尾\n* - 请在下方配置后使用。使用 [RegExp] 匹配 [Site] 链接， 使用 [querySelector] 来搜索相应的文档元素。",
     "description": "Description of the add-on."
   },
   

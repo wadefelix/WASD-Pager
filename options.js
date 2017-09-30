@@ -1,8 +1,9 @@
 
-//全部保存
+// 将数据保存到local storage中
 function saveOptions(allData) {
-  console.log(allData.toString());
+  // 先把本地数据全部擦了，待实现单个擦除后就可以不全部擦除了。
   browser.storage.local.clear();
+  
   var sites = Array();
   for (var i in allData) {
       var data = allData[i];
@@ -19,7 +20,7 @@ function saveOptions(allData) {
   });
 }
 
-// 保存全部的数据解析
+// 获取数据
 var getAllData = function(){
     var tb = document.getElementById('sitesoptions');
         var allData=[];
@@ -72,7 +73,8 @@ function restoreOptions() {
         // 失去焦点移除修改框
         input.onblur = function(){
             var span = document.createElement('span');
-            span.appendChild(document.createTextNode(this.value?this.value:'null'));// 如果修改了单元格的默认值，这里也做相应修改
+            // 如果修改了单元格的默认值，这里也做相应修改
+            span.appendChild(document.createTextNode(this.value?this.value:'null'));
             span.onclick =spanEvent;
             this.parentNode.appendChild(span);
             this.parentNode.removeChild(this);

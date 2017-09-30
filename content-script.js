@@ -7,6 +7,7 @@ document.addEventListener('keypress', function (e) {
         return;
     }
     let keyName = e.key.toUpperCase();
+    console.log('wasd keyName:'+keyName);
     
     let gotoNext = true;
     let gotoHome = false;
@@ -19,6 +20,8 @@ document.addEventListener('keypress', function (e) {
     } else {
         if (keyName === 'A') {
             gotoNext = false;
+        } else if (keyName === 'D') {
+            gotoNext = true;
         } else if (keyName === 'W') {
             gotoPageup = true;
             window.scrollByPages(-1);
@@ -37,24 +40,37 @@ document.addEventListener('keypress', function (e) {
             return;
         }
     }
-    
+    console.log('wasd gotoNext:'+gotoNext);
     browser.storage.local.get('sites').then( sites_query => {
-        let sites = sites_query[0]['sites'].split(',');
-        let site_key;
+        let sites;
+        if (sites_query.hasOwnProperty('sites')) {
+            sites = sites_query['sites'].split(',');
+        } else if (sites_query.hasOwnProperty(0) && sites_query[0].hasOwnProperty('sites')) {
+            sites = sites_query[0]['sites'].split(',');
+        } else {
+            return;
+        }
+        let site_tag;
         for (site in sites) {
             let patt = new RegExp(sites[site]);
             if (patt.test(document.location.host)) {
-                site_key = sites[site];
+                site_tag = sites[site];
                 break;
             }
         }
-        if (site_key !== undefined) {
-            let key = site_key+(gotoNext?"#next":"#pre");
+        if (site_tag !== undefined) {
+            let tag = site_tag+(gotoNext?"#next":"#pre");
             
-            browser.storage.local.get(key).then(result=>{
-                //console.dir(result);
-                let ele = document.querySelector(result[0][key]);
-                ele.click();
+            browser.storage.local.get(tag).then(result=>{
+                let ele;
+                if (result.hasOwnProperty(tag)) {
+                    ele = result[tag];
+                } else if (result.hasOwnProperty(0) && result[0].hasOwnProperty(tag)) {
+                    ele = result[0][tag];
+                } else {
+                    return;
+                }
+                document.querySelector(ele).click();
             }, error => {
               console.log(`Error: ${error}`);
             });

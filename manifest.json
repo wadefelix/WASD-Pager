@@ -1,11 +1,11 @@
 {
   "manifest_version": 2,
-  "name": "WASD Page-Turner",
+  "name": "__MSG_extensionName__",
   "version": "0.1",
 
-  "description": "Page Turner",
+  "description": "__MSG_extensionDescription__",
   "default_locale": "en",
-  "homepage_url": "https://github.com/wadefelix/",
+  "homepage_url": "https://github.com/wadefelix/WASD-Pager",
 
   "developer": {
     "name": "Ren Wei"

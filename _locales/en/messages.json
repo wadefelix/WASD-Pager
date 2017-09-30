@@ -1,11 +1,11 @@
 {
   "extensionName": {
-    "message": "WASD Page-Turner",
+    "message": "WASD Pager",
     "description": "Name of the extension."
   },
 
   "extensionDescription": {
-    "message": "Page Turner",
+    "message": " Page Flipping Helper Extension for Firefox ",
     "description": "Description of the add-on."
   },
   

@@ -7,7 +7,7 @@ function saveOptions(allData) {
   var sites = Array();
   for (var i in allData) {
       var data = allData[i];
-      if (data[0].length>0) {
+      if (data[0].length>0 && sites.indexOf(data[0])<0 ) {
           sites[sites.length] = data[0];
           var siteobj = {};
               siteobj[data[0].toString()+"#pre"]= data[1];
@@ -28,7 +28,7 @@ var getAllData = function(){
         for(var i=0; i<ctr.length; i++){
             allData[i]=[];
             for(var j=0; j<ctr[i].children.length-1; j++)
-                allData[i].push(ctr[i].children[j].children[0].firstChild.nodeValue);
+                allData[i].push(ctr[i].children[j].children[0].firstChild.nodeValue.trim());
         }
         ctr=[];
         return allData;
@@ -99,8 +99,15 @@ function restoreOptions() {
     var strDel = browser.i18n.getMessage("stringDel");
     if (strDel.length==0) strDel = "Del";
 
+    // 默认值，在这里修改的
+    function* genSample(){
+        yield 'bing.com';
+        yield 'a.sb_pagP';
+        yield 'a.sb_pagN';
+    }
     addrow = function(){
         var tr = document.createElement('tr');
+        let sample = genSample();
         for(var j=0; j<colnum; j++){
             var td = document.createElement('td');
             if(j==(colnum-1)){
@@ -111,8 +118,7 @@ function restoreOptions() {
                 td.appendChild(del);
             }else{
                 var span = document.createElement('span');
-                // 如果在添加时修改默认值，在这里修改的
-                span.appendChild(document.createTextNode(arguments[0] instanceof Array?arguments[0][j]:'null'));
+                span.appendChild(document.createTextNode(arguments[0] instanceof Array?arguments[0][j]:sample.next().value));
                 td.appendChild(span);
                 span.onclick =spanEvent;
             }

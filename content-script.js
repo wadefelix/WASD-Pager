@@ -7,7 +7,6 @@ document.addEventListener('keypress', function (e) {
         return;
     }
     let keyName = e.key.toUpperCase();
-    console.log('wasd keyName:'+keyName);
     
     let gotoNext = true;
     let gotoHome = false;
@@ -40,7 +39,7 @@ document.addEventListener('keypress', function (e) {
             return;
         }
     }
-    console.log('wasd gotoNext:'+gotoNext);
+
     browser.storage.local.get('sites').then( sites_query => {
         let sites;
         if (sites_query.hasOwnProperty('sites')) {
@@ -72,7 +71,7 @@ document.addEventListener('keypress', function (e) {
                 }
                 document.querySelector(ele).click();
             }, error => {
-              console.log(`Error: ${error}`);
+              console.log(`WASD Pager Error: ${error}`);
             });
         }
     });

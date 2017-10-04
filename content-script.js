@@ -6,6 +6,17 @@ document.addEventListener('keypress', function (e) {
     if (document.activeElement.tagName=="INPUT" || document.activeElement.tagName=="TEXTAREA") {
         return;
     }
+  browser.storage.local.get('wasd-enabled').then( enabled => {
+    let _enabled = true;;
+    if (enabled.hasOwnProperty('wasd-enabled')) {
+        _enabled = enabled['wasd-enabled'] ? true:false;
+    } else if (enabled.hasOwnProperty(0) && enabled[0].hasOwnProperty('wasd-enabled')) {
+        sites = enabled[0]['sites'] ? true:false;
+    }
+    if (!_enabled) {
+        return;
+    }
+
     let keyName = e.key.toUpperCase();
     
     let gotoNext = true;
@@ -75,5 +86,6 @@ document.addEventListener('keypress', function (e) {
             });
         }
     });
+  });
 }, true);
 

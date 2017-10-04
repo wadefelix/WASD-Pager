@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
-  "version": "0.1",
+  "version": "0.2",
 
   "description": "__MSG_extensionDescription__",
   "default_locale": "en",
@@ -27,6 +27,15 @@
   "permissions": [
     "storage"
   ],
+  
+  "browser_action": {
+    "default_icon": "icons/page-32-colored.png",
+    "default_title": "WASD Enbled"
+  },
+  
+  "background": {
+    "scripts": ["background.js"]
+  },
   
   "options_ui": {
       "page": "options.html"

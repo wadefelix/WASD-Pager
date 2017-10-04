@@ -141,7 +141,9 @@ function restoreOptions() {
                          browser.storage.local.get(sites[i]+"#pre"),
                          browser.storage.local.get(sites[i]+"#next")]).then(
                              function(values){
-                                 addrow(Array(values[0],values[1][values[0]+"#pre"],values[2][values[0]+"#next"]));
+                                 addrow(Array(values[0],
+                                              values[1].hasOwnProperty(values[0]+"#pre") ? values[1][values[0]+"#pre"] : values[1][0][values[0]+"#pre"],
+                                              values[2].hasOwnProperty(values[0]+"#next") ? values[2][values[0]+"#next"] : values[2][0][values[0]+"#next"]));
                              }
                          );
         }

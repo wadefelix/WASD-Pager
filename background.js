@@ -39,4 +39,20 @@ function toggleWASD() {
   });
 }
 
+function initialWASD() {
+  browser.storage.local.get('wasd-enabled').then( enabled => {
+        let _enabled;
+        if (enabled.hasOwnProperty('wasd-enabled')) {
+            _enabled = enabled['wasd-enabled'] ? true:false;
+        } else if (enabled.hasOwnProperty(0) && enabled[0].hasOwnProperty('wasd-enabled')) {
+            sites = enabled[0]['sites'] ? true:false;
+        } else {
+            _enabled = true;
+        }
+        
+        updateIcon(_enabled);
+  });
+}
+initialWASD();
+
 browser.browserAction.onClicked.addListener(toggleWASD);

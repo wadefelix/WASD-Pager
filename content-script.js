@@ -11,7 +11,7 @@ document.addEventListener('keypress', function (e) {
     if (enabled.hasOwnProperty('wasd-enabled')) {
         _enabled = enabled['wasd-enabled'] ? true:false;
     } else if (enabled.hasOwnProperty(0) && enabled[0].hasOwnProperty('wasd-enabled')) {
-        sites = enabled[0]['sites'] ? true:false;
+        _enabled = enabled[0]['wasd-enabled'] ? true:false;
     }
     if (!_enabled) {
         return;

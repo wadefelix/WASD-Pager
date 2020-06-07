@@ -5,7 +5,7 @@
   },
 
   "extensionDescription": {
-    "message": "Page Flipping Helper Extension for Firefox.\n*A - PagePrevious\n*D - PageNext\nW - PageUp\nS - PageDown\nQ - goto the top of page\nE - goto the end of page\n* - need to be configured. Using [RegExp] to match the [Site], and [querySelector] to find the corresponding Document Elements.",
+    "message": "Page Flipping Helper Extension.\n*A - PagePrevious\n*D - need to be configured.",
     "description": "Description of the add-on."
   },
   

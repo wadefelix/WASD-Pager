@@ -1,3 +1,4 @@
+var browser=chrome;
 /*
  * 更新icon
  */

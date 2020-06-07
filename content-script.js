@@ -2,6 +2,8 @@
     https://addons.mozilla.org/en-US/firefox/search/?q=page+scroll&appver=&platform=linux
     后面还可以增加 1 自动卷屏的指令， 2 同步配置，导入导出配置， 3 按站点改为按url控制粒度更细，4 增加个禁用按钮
 */
+var browser=chrome;
+
 document.addEventListener('keypress', function (e) {
     if (document.activeElement.tagName=="INPUT" || document.activeElement.tagName=="TEXTAREA") {
         return;

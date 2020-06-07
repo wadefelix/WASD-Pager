@@ -1,3 +1,4 @@
+var browser=chrome;
 
 // 将数据保存到local storage中
 function saveOptions(allData) {

@@ -36,11 +36,13 @@ document.addEventListener('keypress', function (e) {
             gotoNext = true;
         } else if (keyName === 'W') {
             gotoPageup = true;
-            window.scrollByPages(-1);
+            // window.scrollByPages(-1);
+            document.scrollingElement.scrollBy(0,-window.outerHeight);
             return;
         } else if (keyName === 'S') {
             gotoPagedown = true;
-            window.scrollByPages(1);
+            // window.scrollByPages(1);
+            document.scrollingElement.scrollBy(0,window.outerHeight);
             return;
         } else if (keyName === 'E') {
             gotoEnd = true;

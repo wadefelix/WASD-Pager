@@ -5,16 +5,16 @@
 var browser=chrome;
 
 document.addEventListener('keypress', function (e) {
-    if (document.activeElement.tagName=="INPUT" || document.activeElement.tagName=="TEXTAREA") {
-        return;
-    }
-  browser.storage.local.get('wasd-enabled').then( enabled => {
+  // 文字输入区避免激活
+  if (document.activeElement.tagName=="INPUT" || document.activeElement.tagName=="TEXTAREA") {
+    return;
+  }
+  browser.storage.local.get('wasd-enabled', enabled => {
     let _enabled = true;;
     if (enabled.hasOwnProperty('wasd-enabled')) {
         _enabled = enabled['wasd-enabled'] ? true:false;
-    } else if (enabled.hasOwnProperty(0) && enabled[0].hasOwnProperty('wasd-enabled')) {
-        _enabled = enabled[0]['wasd-enabled'] ? true:false;
     }
+    // 功能关闭时不激活
     if (!_enabled) {
         return;
     }
@@ -53,39 +53,18 @@ document.addEventListener('keypress', function (e) {
         }
     }
 
-    browser.storage.local.get('sites').then( sites_query => {
-        let sites;
-        if (sites_query.hasOwnProperty('sites')) {
-            sites = sites_query['sites'].split(',');
-        } else if (sites_query.hasOwnProperty(0) && sites_query[0].hasOwnProperty('sites')) {
-            sites = sites_query[0]['sites'].split(',');
-        } else {
-            return;
-        }
-        let site_tag;
-        for (site in sites) {
-            let patt = new RegExp(sites[site]);
-            if (patt.test(document.location.host)) {
-                site_tag = sites[site];
-                break;
+    /**
+     * 站点配置信息保存在sync区吧
+     * 格式 key - 站点域名
+     *     value - {next:"<next>", pre: "<pre>"}
+     */
+    browser.storage.sync.get(document.location.host, (sites_cfg) => {
+        let cfg = sites_cfg[document.location.host]
+        if (cfg !== undefined) {
+            let ele = document.querySelector(gotoNext?cfg["next"]:cfg["pre"]);
+            if (ele) {
+                ele.click();
             }
-        }
-        if (site_tag !== undefined) {
-            let tag = site_tag+(gotoNext?"#next":"#pre");
-            
-            browser.storage.local.get(tag).then(result=>{
-                let ele;
-                if (result.hasOwnProperty(tag)) {
-                    ele = result[tag];
-                } else if (result.hasOwnProperty(0) && result[0].hasOwnProperty(tag)) {
-                    ele = result[0][tag];
-                } else {
-                    return;
-                }
-                document.querySelector(ele).click();
-            }, error => {
-              console.log(`WASD Pager Error: ${error}`);
-            });
         }
     });
   });

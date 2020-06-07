@@ -2,31 +2,16 @@ var browser=chrome;
 
 // 将数据保存到local storage中
 function saveOptions(allData) {
-  browser.storage.local.get('wasd-enabled').then( enabled => {
-    let _enabled = true;;
-    if (enabled.hasOwnProperty('wasd-enabled')) {
-        _enabled = enabled['wasd-enabled'] ? true:false;
-    } else if (enabled.hasOwnProperty(0) && enabled[0].hasOwnProperty('wasd-enabled')) {
-        sites = enabled[0]['sites'] ? true:false;
+    var sites_cfg = {};
+    for (var i in allData) {
+        var data = allData[i];
+        if (data[0].length>0) {
+            sites_cfg[data[0]] = {next: data[2], pre:data[1]};
+        }
     }
-      // 先把本地数据全部擦了，待实现单个擦除后就可以不全部擦除了。
-      browser.storage.local.clear();
-      
-      var sites = Array();
-      for (var i in allData) {
-          var data = allData[i];
-          if (data[0].length>0 && sites.indexOf(data[0])<0 ) {
-              sites[sites.length] = data[0];
-              var siteobj = {};
-                  siteobj[data[0].toString()+"#pre"]= data[1];
-                  siteobj[data[0].toString()+"#next"]= data[2];
-              browser.storage.local.set(siteobj);
-          }
-      }
-      browser.storage.local.set({
-        sites: sites.join(',')
-      });
-  });
+    // 先把本地数据全部擦了，待实现单个擦除后就可以不全部擦除了。
+    browser.storage.sync.clear();
+    browser.storage.sync.set(sites_cfg);
 }
 
 // 获取数据
@@ -137,26 +122,14 @@ function restoreOptions() {
     };
     addBtn.onclick = addrow;
 
-    var sites_query = browser.storage.local.get("sites");
-    sites_query.then(result=>{
-        var sites = result["sites"]
-        if (sites===undefined) {
+    browser.storage.sync.get(null,(sites_cfg)=>{
+        if (sites_cfg===undefined || sites_cfg===null) {
             return
         }
-        sites = sites.split(',');
 
-        for (var i in sites) {
-            Promise.all([sites[i],
-                         browser.storage.local.get(sites[i]+"#pre"),
-                         browser.storage.local.get(sites[i]+"#next")]).then(
-                             function(values){
-                                 addrow(Array(values[0],
-                                              values[1].hasOwnProperty(values[0]+"#pre") ? values[1][values[0]+"#pre"] : values[1][0][values[0]+"#pre"],
-                                              values[2].hasOwnProperty(values[0]+"#next") ? values[2][values[0]+"#next"] : values[2][0][values[0]+"#next"]));
-                             }
-                         );
+        for (var s in sites_cfg) {
+            addrow(Array(s, sites_cfg[s].pre, sites_cfg[s].next))
         }
-
     })
 }
 

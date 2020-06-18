@@ -35,8 +35,5 @@
     "scripts": ["background.js"]
   },
   
-  "options_ui": {
-      "page": "options.html"
-  }
-
+  "options_page": "options.html"
 }
